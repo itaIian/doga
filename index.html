@@ -14,16 +14,16 @@
         body, html {
             width: 100%; 
             height: 100%; 
-            background-color: #000; 
+            background-color: #000;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            overflow: hidden; 
+            overflow: hidden;
             color: white; 
             display: flex; 
             justify-content: center; 
             align-items: center;
         }
 
-     
+       
         #start-screen {
             display: flex; 
             flex-direction: column; 
@@ -41,7 +41,7 @@
         }
         
         #download-btn {
-            background-color: #28a745; 
+            background-color: #28a745;
             color: white; 
             border: none; 
             padding: 18px 50px; 
@@ -58,7 +58,7 @@
             transform: scale(0.95); 
         }
 
-      
+        
         #slideshow {
             display: none; 
             width: 100%; 
@@ -79,7 +79,7 @@
             object-fit: cover;
             object-position: center;
             opacity: 0; 
-          
+           
             transition: opacity 2s ease-in-out; 
         }
         
@@ -87,7 +87,7 @@
             opacity: 1; 
         }
 
-     
+        
         #final-screen {
             display: none; 
             text-align: center; 
@@ -109,4 +109,68 @@
 
     <div id="start-screen">
         <h1>bedava gta 4 timas edition indir</h1>
-        <button id="download-btn">HEMEN
+        <button id="download-btn">HEMEN İNDİR</button>
+    </div>
+
+    <div id="slideshow">
+        <img class="slide" src="734387458_17945845812247341_8335871828247282574_n.jpg" alt="Foto 1">
+        <img class="slide" src="Gemini_Generated_Image_keqebkkeqebkkeqe.png" alt="Foto 2">
+        <img class="slide" src="images (73).jpg" alt="Foto 3">
+        <img class="slide" src="Gemini_Generated_Image_p09ea5p09ea5p09e.png" alt="Foto 4">
+        <img class="slide" src="images (74).jpg" alt="Foto 5">
+    </div>
+
+    <div id="final-screen">
+        <h2>doga izmirden geldiginde cikis yapiyor.</h2>
+    </div>
+
+    <script>
+        const startScreen = document.getElementById('start-screen');
+        const downloadBtn = document.getElementById('download-btn');
+        const slideshow = document.getElementById('slideshow');
+        const slides = document.querySelectorAll('.slide');
+        const finalScreen = document.getElementById('final-screen');
+        const bgMusic = document.getElementById('bg-music');
+
+        let currentSlide = 0;
+        const slideDuration = 6000; 
+
+        downloadBtn.addEventListener('click', () => {
+          
+            bgMusic.play().catch(e => console.log("Tarayıcı otomatik müziği engelledi.", e));
+            
+         
+            startScreen.style.display = 'none';
+            slideshow.style.display = 'block';
+
+        
+            setTimeout(() => {
+                slides[currentSlide].classList.add('active');
+            }, 100);
+            
+          
+            const slideInterval = setInterval(() => {
+               
+                slides[currentSlide].classList.remove('active');
+                currentSlide++;
+
+                if (currentSlide < slides.length) {
+                    
+                    setTimeout(() => {
+                        slides[currentSlide].classList.add('active');
+                    }, 1000);
+                } else {
+                   
+                    clearInterval(slideInterval);
+                    
+                    
+                    setTimeout(() => {
+                        slideshow.style.display = 'none';
+                        finalScreen.style.display = 'block';
+                    }, 2000); 
+                }
+            }, slideDuration);
+        });
+    </script>
+</body>
+</html>
