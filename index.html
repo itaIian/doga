@@ -14,16 +14,15 @@
         body, html {
             width: 100%; 
             height: 100%; 
-            background-color: #000;
+            background-color: #000; 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            overflow: hidden;
+            overflow: hidden; 
             color: white; 
             display: flex; 
             justify-content: center; 
             align-items: center;
         }
 
-       
         #start-screen {
             display: flex; 
             flex-direction: column; 
@@ -41,7 +40,7 @@
         }
         
         #download-btn {
-            background-color: #28a745;
+            background-color: #28a745; 
             color: white; 
             border: none; 
             padding: 18px 50px; 
@@ -58,7 +57,6 @@
             transform: scale(0.95); 
         }
 
-        
         #slideshow {
             display: none; 
             width: 100%; 
@@ -76,18 +74,25 @@
             left: 0; 
             width: 100%; 
             height: 100%;
-            object-fit: cover;
-            object-position: center;
+            object-fit: cover; 
             opacity: 0; 
-           
-            transition: opacity 2s ease-in-out; 
+            transition: opacity 1s ease-in-out; 
         }
         
         .slide.active { 
             opacity: 1; 
+            animation: gtaPanEffect 6s linear forwards;
         }
 
-        
+        @keyframes gtaPanEffect {
+            0% {
+                object-position: 0% center; 
+            }
+            100% {
+                object-position: 100% center; 
+            }
+        }
+
         #final-screen {
             display: none; 
             text-align: center; 
@@ -114,9 +119,9 @@
 
     <div id="slideshow">
         <img class="slide" src="734387458_17945845812247341_8335871828247282574_n.jpg" alt="Foto 1">
-        <img class="slide" src="Gemini_Generated_Image_keqebkkeqebkkeqe.jpg" alt="Foto 2">
+        <img class="slide" src="Gemini_Generated_Image_keqebkkeqebkkeqe.png" alt="Foto 2">
         <img class="slide" src="images (73).jpg" alt="Foto 3">
-        <img class="slide" src="Gemini_Generated_Image_p09ea5p09ea5p09e.jpg" alt="Foto 4">
+        <img class="slide" src="Gemini_Generated_Image_p09ea5p09ea5p09e.png" alt="Foto 4">
         <img class="slide" src="images (74).jpg" alt="Foto 5">
     </div>
 
@@ -136,38 +141,25 @@
         const slideDuration = 6000; 
 
         downloadBtn.addEventListener('click', () => {
-          
-            bgMusic.play().catch(e => console.log("Tarayıcı otomatik müziği engelledi.", e));
+            bgMusic.play().catch(e => console.log(e));
             
-         
             startScreen.style.display = 'none';
             slideshow.style.display = 'block';
 
-        
-            setTimeout(() => {
-                slides[currentSlide].classList.add('active');
-            }, 100);
+            slides[currentSlide].classList.add('active');
             
-          
             const slideInterval = setInterval(() => {
-               
                 slides[currentSlide].classList.remove('active');
                 currentSlide++;
 
                 if (currentSlide < slides.length) {
-                    
-                    setTimeout(() => {
-                        slides[currentSlide].classList.add('active');
-                    }, 1000);
+                    slides[currentSlide].classList.add('active');
                 } else {
-                   
                     clearInterval(slideInterval);
-                    
-                    
                     setTimeout(() => {
                         slideshow.style.display = 'none';
                         finalScreen.style.display = 'block';
-                    }, 2000); 
+                    }, 1000); 
                 }
             }, slideDuration);
         });
